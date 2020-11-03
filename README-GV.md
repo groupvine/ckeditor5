@@ -16,11 +16,13 @@ nvm use
 
 (.nvmrc has been added for this version)
 
-Also, yarn is needed here, so after switching to node 14.15.0:
+Then, on my OS-X laptop, also needed to move aside ~/.npmrc which was
+pointing to a fixed, old version of npm!
+
+Yarn is also needed for building, so after switching to node 14.15.0:
 
 ```
 npm install -g yarn
-source ~/.bashrc
 ```
 
 Then can proceed with [build instructions](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html)
