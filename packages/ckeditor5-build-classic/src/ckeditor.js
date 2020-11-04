@@ -125,9 +125,9 @@ ClassicEditor.defaultConfig = {
 			'numberedList',
                         'alignment',
 			'|',
-                    // 'gv-user-attribute',
-                    // 'gv-email-widget',
-                    // 'gv-input-attribute',
+                        'gv-user-attribute',
+                        'gv-email-widget',
+                        'gv-input-attribute',
                         'fontColor', 'fontBackgroundColor',
 			'insertTable',
 			'|',
@@ -141,7 +141,7 @@ ClassicEditor.defaultConfig = {
                         'removeformat',
 			'|',
 			'undo',
-			'redo',
+			'redo'
 		]
 	},
 
@@ -224,7 +224,6 @@ ClassicEditor.defaultConfig = {
 		'Verdana, Geneva, sans-serif'
 	    ]
         },
-
 
 
 	// This value must be kept in sync with the language defined in webpack.config.js.
