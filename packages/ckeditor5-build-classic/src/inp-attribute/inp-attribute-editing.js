@@ -110,7 +110,7 @@ export default class InputAttributeEditing extends Plugin {
                 classes: [ 'gv-input-attribute' ],
                 converterPriority: 'highest'  // be sure it converts ahead of, e.g., outside wrapper figures or whatever
             },
-            model: ( viewElement, modelWriter ) => {
+            model: ( viewElement, {writer: modelWriter} ) => {
                 if (inputAttTypes == null) { setInputTypes(); }
 
                 // Extract the "type" from data-type attribute
@@ -123,7 +123,7 @@ export default class InputAttributeEditing extends Plugin {
 
         conversion.for( 'editingDowncast' ).elementToElement( {
             model: 'gv-input-attribute',
-            view: ( modelItem, viewWriter ) => {
+            view: ( modelItem, {writer: viewWriter} ) => {
                 const widgetElement = createInputAttributeView( modelItem, viewWriter, {disabled:true} );
 
                 // Enable widget handling on a gv-input-attribute element inside the editing view.
@@ -133,7 +133,7 @@ export default class InputAttributeEditing extends Plugin {
 
         conversion.for( 'dataDowncast' ).elementToElement( {
             model: 'gv-input-attribute',
-            view: ( modelItem, viewWriter ) => {
+            view: ( modelItem, {writer: viewWriter} ) => {
                 return createInputAttributeView( modelItem, viewWriter, {disabled:false} );
             }
         } );

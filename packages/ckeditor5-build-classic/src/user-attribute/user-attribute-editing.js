@@ -59,7 +59,7 @@ export default class UserAttributeEditing extends Plugin {
                 classes: [ 'gv-metatag' ],
                 converterPriority: 'highest'  // be sure it converts ahead of regular images
             },
-            model: ( viewElement, modelWriter ) => {
+            model: ( viewElement, {writer: modelWriter} ) => {
                 // Note that this is called after the custom GV data processor's 
                 // toView() has run
 
@@ -83,8 +83,8 @@ export default class UserAttributeEditing extends Plugin {
 
         conversion.for( 'editingDowncast' ).elementToElement( {
             model: 'gv-metatag',
-            view: ( modelItem, viewWriter ) => {
-                const widgetElement = createUserAttributeView( modelItem, viewWriter );
+            view: ( modelItem, {writer: viewWriter} ) => {
+                const widgetElement = createUserAttributeView( modelItem, {writer: viewWriter} );
 
                 // Enable widget handling on a gv-metatag element inside the editing view.
                 return toWidget( widgetElement, viewWriter );
@@ -97,7 +97,7 @@ export default class UserAttributeEditing extends Plugin {
         } );
 
         // Helper method for both downcast converters.
-        function createUserAttributeView( modelItem, viewWriter ) {
+        function createUserAttributeView( modelItem, {writer: viewWriter} ) {
             const attType = modelItem.getAttribute( 'type' );
             const attEwId = modelItem.getAttribute( 'ewId' );
 
