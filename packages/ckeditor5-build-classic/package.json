@@ -41,6 +41,7 @@
     "@ckeditor/ckeditor5-heading": "^23.1.0",
     "@ckeditor/ckeditor5-image": "^23.1.0",
     "@ckeditor/ckeditor5-indent": "^23.1.0",
+    "@ckeditor/ckeditor5-inspector": "^2.2.0",
     "@ckeditor/ckeditor5-link": "^23.1.0",
     "@ckeditor/ckeditor5-list": "^23.1.0",
     "@ckeditor/ckeditor5-media-embed": "^23.1.0",
@@ -72,6 +73,12 @@
   },
   "scripts": {
     "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
     "preversion": "npm run build"
+  },
+  "dependencies": {
+    "gv-types": "github:groupvine/gv-types",
+    "jquery": "^3.5.1",
+    "url-parse": "^1.4.7"
   }
 }

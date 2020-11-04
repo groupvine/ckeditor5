@@ -38,6 +38,17 @@ import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 
+
+//
+// Custom GroupVine plugins
+//
+
+// import GVDataProcessorPlugin from './data-proc/data-proc';
+// import GVClipboardPlugin from './clipboard/clipboard';
+// import UserAttribute from './user-attribute/user-attribute';
+// import InputAttribute from './inp-attribute/inp-attribute';
+// import EmailWidget from './email-widget/email-widget';
+
 export default class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
@@ -73,6 +84,13 @@ ClassicEditor.builtinPlugins = [
         Alignment,
         RemoveFormat,
 
+        // GroupVine plugins
+//        GVDataProcessorPlugin,
+//        GVClipboardPlugin,
+//        UserAttribute,
+//        InputAttribute,
+//        EmailWidget,
+
 	TextTransformation
 ];
 
@@ -107,6 +125,9 @@ ClassicEditor.defaultConfig = {
 			'numberedList',
                         'alignment',
 			'|',
+                    // 'gv-user-attribute',
+                    // 'gv-email-widget',
+                    // 'gv-input-attribute',
                         'fontColor', 'fontBackgroundColor',
 			'insertTable',
 			'|',
@@ -159,6 +180,7 @@ ClassicEditor.defaultConfig = {
             ]
 
 	},
+
 	table: {
 		contentToolbar: [
 			'tableColumn',
@@ -167,13 +189,21 @@ ClassicEditor.defaultConfig = {
 		]
 	},
 
-        // fontFamily: {
-        //     options: [
-        //        'default',
-        //        'Ubuntu, Arial, sans-serif',
-        //        'Ubuntu Mono, Courier New, Courier, monospace'
-        //    ]
-        // },
+        heading: {
+            options: [
+                // view.name and view.classes will apply to generated HTML; class will apply to heading in Editor dropdown
+                { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },
+
+                { model: 'heading1', view: {name : 'h1', classes : 'gv-h1'}, 
+                  title: 'Title', class: 'ck-heading_heading1 gv-heading1' },
+
+                { model: 'heading2', view: {name : 'h2', classes : 'gv-h2'}, 
+                  title: 'Section', class: 'ck-heading_heading2 gv-heading2' },
+
+                { model: 'heading3', view: {name : 'h3', classes : 'gv-h3'}, 
+                  title: 'Subsection', class: 'ck-heading_heading3 gv-heading3' }
+            ]
+        },
 
         fontFamily : {
             supportAllValues: true,

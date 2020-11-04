@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>GroupVine CKEditor5 build test</title>
+	<style>
+		body {
+			max-width: 800px;
+			margin: 20px auto;
+		}
+
+                .ck.ck-dropdown .widgetMenuMob.ck-button.ck-dropdown__button .ck-button__label,
+                .ck.ck-dropdown .personalizeMenuMob.ck-button.ck-dropdown__button .ck-button__label {
+                    width: 1em;
+                }
+	</style>
+        <link rel="stylesheet" type="text/css" href="../build/editor-styles.css"/>
+</head>
+<body>
+
+<h1>GroupVine CKEditor5 build test</h1>
+
+<div id="editor">
+</div>
+
+
+<h1>Preview</h1>
+<div id="preview" style="padding:10px; border: 3px solid grey">
+</div>
+
+
+<script src="../build/ckeditor.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-inspector/build/inspector.js"></script>
+<script src="./gv-test.js"></script>
+
+</body>
+</html>
