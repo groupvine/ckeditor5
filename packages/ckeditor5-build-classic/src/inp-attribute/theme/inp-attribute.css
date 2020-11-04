@@ -1,0 +1,45 @@
+/*
+  Should be kept consistent with Input attributes section of 
+  gv-mailweb/client/src/sass/styles.scss
+*/
+
+.gv-input-attribute {
+  display: inline-table;
+  margin: 4px 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.gv-input-attribute.block {
+  display: table;
+}
+
+.gv-input-attribute input,
+.gv-input-attribute select {
+  width: 175px;
+  font-size: 14px;
+}
+
+.gv-input-attribute input.gv-input-checkbox {
+  width: 15px;                    
+}
+
+.gv-input-label {
+  display: table-cell;
+  text-align: right;
+  vertical-align: middle;                  
+  width: 200px;
+  padding-right: 10px;
+  font-size: 14px;
+  color: #777;
+}
+@media only screen and (max-width: 400px)  {
+  .gv-input-label {
+    width: 160px;
+  }
+}
+
+.gv-input-wrapper {
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;                  
+}

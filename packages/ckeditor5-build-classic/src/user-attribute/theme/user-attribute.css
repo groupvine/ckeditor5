@@ -1,0 +1,8 @@
+
+.user-attribute {
+
+}
+
+.user-attribute::selection {
+  /* display:none; */
+}

@@ -25,16 +25,20 @@ Yarn is also needed for building, so after switching to node 14.15.0:
 npm install -g yarn
 ```
 
-Then can proceed with [build instructions](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html)
+(May need to ensure that you're using the correct 'npm' for node 14.15.0)
 
-
-# TODO -- Below
+Then can proceed with [build
+instructions](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html)
 
 
 Also, for some CSS tweaks (to save an external editor-styles.css
-file), see the "Extracting CSS" section here:
+file), see the "Extracting CSS" section here [not needed?]:
 
 https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/advanced-setup.html
+
+Update ```gv-types/src/styles.ts``` with up-to-date styles
+[here](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/content-styles.html).
+
 
 ## Bringing Up-to-date
 
