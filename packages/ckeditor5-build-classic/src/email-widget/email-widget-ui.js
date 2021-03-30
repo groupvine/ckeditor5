@@ -115,9 +115,13 @@ export default class EmailWidgetUI extends Plugin {
                                  if (results.error) {
                                      alert(results.error);
                                  } else {
-                                     // modify element so that meta img is re-refetched (in case it changed)
-                                     // editor.execute( 'gv-metatag', { value: type, ewId : results.ewId } );
-                                     // editor.editing.view.focus();
+                                     // Force element-view refresh so that 
+                                     // 
+                                     // meta img is re-refetched (in case it changed)
+                                     editor.model.change(writer => {
+                                         writer.setAttribute('type', 'temp-refresh', modelElement);
+                                         writer.setAttribute('type', type,           modelElement);
+                                     });
                                  }
                              }
                          });
