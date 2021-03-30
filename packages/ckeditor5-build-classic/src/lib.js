@@ -155,3 +155,7 @@ export function computeWindowSize() {
         width  : window.innerWidth
     };
 }
+
+export function dateVer() {
+    return Math.floor( (new Date()).getTime() / 1000 );
+}

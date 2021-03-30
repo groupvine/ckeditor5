@@ -10,6 +10,8 @@ import  ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickob
 import { DoubleClickObserver } from '../dblclick/dblclick';
 import { isMobile }            from '../lib';
 
+import { dateVer }             from '../lib';
+
 export default class EmailWidgetUI extends Plugin {
 
     init() {
@@ -119,8 +121,7 @@ export default class EmailWidgetUI extends Plugin {
                                      // 
                                      // meta img is re-refetched (in case it changed)
                                      editor.model.change(writer => {
-                                         writer.setAttribute('type', 'temp-refresh', modelElement);
-                                         writer.setAttribute('type', type,           modelElement);
+                                         writer.setAttribute('ver', dateVer(), modelElement);
                                      });
                                  }
                              }

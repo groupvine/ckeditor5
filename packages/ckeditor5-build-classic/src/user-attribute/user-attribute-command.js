@@ -1,5 +1,7 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 
+import { dateVer }             from '../lib';
+
 export default class UserAttributeCommand extends Command {
 
     // This is shared with email-widgets code, so support ewId arg
@@ -13,6 +15,7 @@ export default class UserAttributeCommand extends Command {
             let atts = {type : value};
             if (ewId !== null) {
                 atts['ewId'] = ewId;
+                atts['ver']  = dateVer();
             }
             const userAtt = writer.createElement( 'gv-metatag', atts );
 

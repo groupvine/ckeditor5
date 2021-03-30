@@ -4,6 +4,8 @@ import UserAttributeCommand from './user-attribute-command';
 
 import './theme/user-attribute.css';
 
+import { dateVer }             from '../lib';
+
 import { toWidget } from '@ckeditor/ckeditor5-widget/src/utils';
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
@@ -45,7 +47,7 @@ export default class UserAttributeEditing extends Plugin {
             isObject: true,
 
             // The user-attribute can have many types: firstname, lastname, email, id, etc.
-            allowAttributes: [ 'type', 'ewId' ]
+            allowAttributes: [ 'type', 'ewId', 'ver' ]
         } );
     }
 
@@ -67,7 +69,8 @@ export default class UserAttributeEditing extends Plugin {
                 const attType = viewElement.getChild(0).data.trim();
 
                 let data = {
-                    type : attType
+                    type : attType,
+                    ver  : dateVer()
                 };
 
                 // Check for supported data attrbutes
@@ -100,11 +103,12 @@ export default class UserAttributeEditing extends Plugin {
         function createUserAttributeView( modelItem, {writer: viewWriter} ) {
             const attType = modelItem.getAttribute( 'type' );
             const attEwId = modelItem.getAttribute( 'ewId' );
+            const attVer  = modelItem.getAttribute( 'ver' );
 
             let src = metaImgBaseUrl + '/' + attType;
             if (attEwId != null) {
                 src += "?ewid=" + attEwId;
-                src += "&_=" + Math.round((new Date()).getTime() / 1000);   // cache-buster, for late
+                src += "&_=" + attVer;   // cache-buster, for late
             }
 
             const userAttributeView = viewWriter.createContainerElement( 'img', {src : src});
