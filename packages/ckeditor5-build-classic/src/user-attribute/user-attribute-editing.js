@@ -135,7 +135,7 @@ export default class UserAttributeEditing extends Plugin {
             let range  = data.range;
             let pos    = data.range.start;
 
-            writer.remove(range);
+            // writer.remove(range);
             writer.insert(pos, newViewElement);
         }
     }
