@@ -118,6 +118,10 @@ export default class UserAttributeEditing extends Plugin {
         }
 
         function handleVerChange ( evt, data, conversionApi ) {
+            // no-op
+            return;
+            
+            /*
             // see: https://stackoverflow.com/questions/51319311/refreshing-a-ckeditor5-widget-upon-model-changes
             let writer = conversionApi.writer;
             
@@ -135,8 +139,9 @@ export default class UserAttributeEditing extends Plugin {
             let range  = data.range;
             let pos    = data.range.start;
 
-            // writer.remove(range);
+            writer.remove(range);
             writer.insert(pos, newViewElement);
+            */
         }
     }
 }
