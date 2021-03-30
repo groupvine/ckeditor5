@@ -109,7 +109,18 @@ export default class EmailWidgetUI extends Plugin {
 
             if (configEw) {
                 configEw(modelElement.getAttribute('type'),
-                         modelElement.getAttribute('ewId'));
+                         modelElement.getAttribute('ewId'),
+                         (results) => {
+                             if (results) {
+                                 if (results.error) {
+                                     alert(results.error);
+                                 } else {
+                                     // modify element so that meta img is re-refetched (in case it changed)
+                                     // editor.execute( 'gv-metatag', { value: type, ewId : results.ewId } );
+                                     // editor.editing.view.focus();
+                                 }
+                             }
+                         });
             }
         });
     }
