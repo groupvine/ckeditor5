@@ -2,9 +2,6 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 import UserAttributeCommand from './user-attribute-command';
 
-import ViewPosition from '@ckeditor/ckeditor5-engine/src/view/position';
-import ViewRange    from '@ckeditor/ckeditor5-engine/src/view/range';
-
 import './theme/user-attribute.css';
 
 import { dateVer }             from '../lib';
@@ -135,8 +132,8 @@ export default class UserAttributeEditing extends Plugin {
 
             // Replace view element
 
-            let pos    = ViewPosition.createAt(viewElement);
-            let range  = ViewRange.createAt(viewElement);
+            let range  = data.range;
+            let pos    = data.range.start;
 
             writer.remove(range);
             writer.insert(pos, newViewElement);
