@@ -2,6 +2,9 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 import UserAttributeCommand from './user-attribute-command';
 
+import ViewPosition from '@ckeditor/ckeditor5-engine/src/view/position';
+import ViewRange    from '@ckeditor/ckeditor5-engine/src/view/range';
+
 import './theme/user-attribute.css';
 
 import { dateVer }             from '../lib';
@@ -119,21 +122,24 @@ export default class UserAttributeEditing extends Plugin {
 
         function handleVerChange ( evt, data, conversionApi ) {
             // see: https://stackoverflow.com/questions/51319311/refreshing-a-ckeditor5-widget-upon-model-changes
-            let xx = 1;
+            let writer = conversionApi.writer;
             
-            // const myModelElement = data.item;
+            const myModelElement = data.item;
 
             // Mark element as consumed by conversion.
-            // conversionApi.consumable.consume( data.item, evt.name );
+            conversionApi.consumable.consume( data.item, evt.name );
 
             // Get mapped view element to update.
-            // const viewElement = conversionApi.mapper.toViewElement( myModelElement );
+            const viewElement    = conversionApi.mapper.toViewElement( myModelElement );
+            const newViewElement = createUserAttributeView( myModelElement, {writer: writer} ); // update src
 
-            // Remove current <div> element contents.
-            // conversionApi.writer.remove( ViewRange.createOn( viewElement.getChild( 0 ) ) );
+            // Replace view element
 
-            // Set current content
-            // setContent( conversionApi.writer, data.attributeNewValue, viewElement );
+            let pos    = ViewPosition.createAt(viewElement);
+            let range  = ViewRange.createAt(viewElement);
+
+            writer.remove(range);
+            writer.insert(pos, newViewElement);
         }
     }
 }
