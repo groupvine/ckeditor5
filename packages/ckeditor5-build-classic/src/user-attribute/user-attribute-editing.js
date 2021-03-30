@@ -69,14 +69,14 @@ export default class UserAttributeEditing extends Plugin {
                 const attType = viewElement.getChild(0).data.trim();
 
                 let data = {
-                    type : attType,
-                    ver  : dateVer()
+                    type : attType
                 };
 
                 // Check for supported data attrbutes
                 let ewId = viewElement.getAttribute('data-ewid');
                 if (ewId != null) {
                     data['ewId'] = ewId;
+                    data['ver']  = dateVer();
                 }
 
                 // console.log("Upcast: " + attType);
@@ -92,12 +92,12 @@ export default class UserAttributeEditing extends Plugin {
                 // Enable widget handling on a gv-metatag element inside the editing view.
                 return toWidget( widgetElement, viewWriter );
             }
-        } );
+        } ).add( dispatcher => dispatcher.on( 'attribute:ver', handleVerChange ) );
 
         conversion.for( 'dataDowncast' ).elementToElement( {
             model: 'gv-metatag',
             view: createUserAttributeView
-        } );
+        } ).add( dispatcher => dispatcher.on( 'attribute:ver', handleVerChange ) );
 
         // Helper method for both downcast converters.
         function createUserAttributeView( modelItem, {writer: viewWriter} ) {
@@ -115,6 +115,25 @@ export default class UserAttributeEditing extends Plugin {
             // console.log("Downcast: " + attType);
 
             return userAttributeView;
+        }
+
+        function handleVerChange ( evt, data, conversionApi ) {
+            // see: https://stackoverflow.com/questions/51319311/refreshing-a-ckeditor5-widget-upon-model-changes
+            let xx = 1;
+            
+            // const myModelElement = data.item;
+
+            // Mark element as consumed by conversion.
+            // conversionApi.consumable.consume( data.item, evt.name );
+
+            // Get mapped view element to update.
+            // const viewElement = conversionApi.mapper.toViewElement( myModelElement );
+
+            // Remove current <div> element contents.
+            // conversionApi.writer.remove( ViewRange.createOn( viewElement.getChild( 0 ) ) );
+
+            // Set current content
+            // setContent( conversionApi.writer, data.attributeNewValue, viewElement );
         }
     }
 }
