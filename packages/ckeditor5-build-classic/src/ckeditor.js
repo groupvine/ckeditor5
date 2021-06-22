@@ -39,6 +39,9 @@ import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 
+import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
+import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
+
 
 //
 // Custom GroupVine plugins
@@ -49,6 +52,16 @@ import GVClipboardPlugin from './clipboard/clipboard';
 import UserAttribute from './user-attribute/user-attribute';
 import InputAttribute from './inp-attribute/inp-attribute';
 import EmailWidget from './email-widget/email-widget';
+
+
+function SpecialCharactersEmoji( editor ) {
+    editor.plugins.get( 'SpecialCharacters' ).addItems( 'Emoji', [
+        { title: 'smiley face', character: '😃' },
+        { title: 'cool face', character: '😎' },
+        { title: 'heart', character: '♥' }
+    ] );
+}
+
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -75,7 +88,7 @@ ClassicEditor.builtinPlugins = [
         IndentBlock,
 	Link,
 	List,
-        MediaEmbed,
+        // MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
 	Table,
@@ -92,6 +105,10 @@ ClassicEditor.builtinPlugins = [
         UserAttribute,
         InputAttribute,
         EmailWidget,
+
+        SpecialCharacters, 
+        SpecialCharactersEssentials, 
+        SpecialCharactersEmoji,
 
 	TextTransformation
 ];
@@ -116,9 +133,12 @@ ClassicEditor.defaultConfig = {
         },
 
 	toolbar: {
+                // shouldNotGroupWhenFull : true,
+
 		items: [
 			'heading',
-                        'fontSize', 'fontFamily', 
+                        'fontSize', 
+                        'fontFamily',
 			'bold',
 			'italic',
                         'underline',
@@ -138,7 +158,8 @@ ClassicEditor.defaultConfig = {
 			'|',
 			'link',
 			'imageUpload',
-		        'mediaEmbed',
+     		        // 'mediaEmbed',
+                        'specialCharacters',
                         'removeformat',
 			'|',
 			'undo',

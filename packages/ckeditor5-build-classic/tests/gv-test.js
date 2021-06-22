@@ -43,7 +43,10 @@ const initContent = `
       display:none;
     }
 
-    .ck-dropdown__panel {
+    .ck-font-size-dropdown .ck-dropdown__panel,
+    .ck-font-family-dropdown .ck-dropdown__panel,
+    .widgetsDropdown .ck-dropdown__panel,
+    .personalizeDropdown .ck-dropdown__panel {
       max-height: 250px;
       overflow-y: auto;
       overflow-x: hidden;
@@ -59,7 +62,7 @@ const initContent = `
     </p>
 
     <p>
-      <img src="http://metaimg.localhost.test:8098/ew/feedback?ewid=22">
+      <img src="http://metaimg.localhost.test:8098/ew/text?ewid=48">
     </p>
 
     <!--
