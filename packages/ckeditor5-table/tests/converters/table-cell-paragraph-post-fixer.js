@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -28,6 +28,29 @@ describe( 'Table cell paragraph post-fixer', () => {
 
 	afterEach( () => {
 		editor.destroy();
+	} );
+
+	it( 'should omit elements that are not table rows (on table insert)', () => {
+		model.schema.register( 'foo', {
+			allowIn: 'table',
+			allowContentOf: '$block'
+		} );
+		editor.conversion.elementToElement( {
+			model: 'foo',
+			view: 'foo'
+		} );
+
+		setModelData( model,
+			'<table>' +
+				'<foo>' +
+					'bar' +
+				'</foo>' +
+			'</table>'
+		);
+
+		assertEqualMarkup( getModelData( model, { withoutSelection: true } ),
+			'<table><foo>bar</foo></table>'
+		);
 	} );
 
 	it( 'should add a paragraph to an empty table cell (on table insert)', () => {

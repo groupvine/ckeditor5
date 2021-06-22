@@ -53,10 +53,18 @@ Commit and push any local changes, then:
 
 ```
 git fetch upstream
-git checkout master
-git merge upstream/master
+git merge upstream/stable
 git status
 ```
+
+[
+Old, outdated (now using stable branch):
+```
+  # git checkout master
+  # git merge upstream/master
+```
+]
+
 
 Manually edit to resolve conflicts (editing not really needed in build area), then for each of these files:
 
@@ -68,6 +76,7 @@ Then reinstall & build
 
 ```
 rm -rf node_modules
+rm package-lock.json
 npm install
 npm run build
 ```

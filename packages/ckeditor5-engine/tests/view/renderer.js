@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -2014,6 +2014,7 @@ describe( 'Renderer', () => {
 				expect( container.style.position ).to.equal( 'fixed' );
 				expect( container.style.top ).to.equal( '0px' );
 				expect( container.style.left ).to.equal( '-9999px' );
+				expect( container.className ).to.equal( 'ck-fake-selection-container' );
 			} );
 
 			it( 'should move fake selection container between editables', () => {
@@ -3433,6 +3434,27 @@ describe( 'Renderer', () => {
 				renderer.render();
 
 				expect( domRoot.innerHTML ).to.equal( '<span>2</span><strong>6</strong><span>5</span>1<span>3</span><strong>7</strong>4' );
+			} );
+
+			it( 'should correctly handle multiple changes when using fastDiff', () => {
+				let str = '';
+
+				for ( let i = 0; i < 100; i++ ) {
+					str += `${ i }<attribute:span>${ i }</attribute:span>`;
+				}
+
+				viewRoot._insertChild( 0, parse( str ) );
+				renderer.markToSync( 'children', viewRoot );
+				renderer.render();
+
+				viewRoot._removeChildren( 0, 1 );
+				viewRoot._removeChildren( 4, 1 );
+				renderer.markToSync( 'children', viewRoot );
+				renderer.render();
+
+				expect( domRoot.innerHTML ).to.equal(
+					str.slice( 1 ).replaceAll( 'attribute:span', 'span' ).replace( '<span>2</span>', '' )
+				);
 			} );
 		} );
 

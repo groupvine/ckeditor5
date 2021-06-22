@@ -101,6 +101,16 @@ By default, the media embed feature outputs semantic `<oembed url="...">` tags f
 </figure>
 ```
 
+Further customization of the semantic data output can be done through the {@link module:media-embed/mediaembed~MediaEmbedConfig#elementName `config.mediaEmbed.elementName`} configuration. As an example, if `elementName` is set to `o-embed`:
+
+```html
+<figure class="media">
+	<o-embed url="https://media-url"></o-embed>
+</figure>
+```
+
+If `elementName` is overridden to something beside the default value, existing `<oembed>` elements will still be shown for backward compatibility purposes.
+
 #### Including previews in data
 
 Optionally, by setting `mediaEmbed.previewsInData` to `true` you can configure the media embed feature to output media in the same way they look in the editor. So if the media element is "previewable", the media preview (HTML) is saved to the database:
@@ -348,7 +358,7 @@ The {@link module:media-embed/automediaembed~AutoMediaEmbed} plugin recognizes m
 	The media URL must be the only content pasted to be properly embedded. Multiple links (`"http://media.url http://another.media.url"`) as well as bigger chunks of content (`"This link http://media.url will not be auto–embedded when pasted."`) are ignored.
 </info-box>
 
-If the automatic embedding was unexpected, for instance when the link was meant to remain in the content as text, simply undo the action (by clicking the "Undo" button in the toolbar or using the <kbd>Ctrl/⌘</kbd>+<kbd>Z</kbd> keystrokes).
+If the automatic embedding was unexpected, for instance when the link was meant to remain in the content as text, simply undo the action (by clicking the "Undo" button in the toolbar or using the <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Z</kbd> keystrokes).
 
 ## Styling media in the editor content
 

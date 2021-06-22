@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -9,6 +9,7 @@ import ImageCaptionEditing from '../../src/imagecaption/imagecaptionediting';
 import ImageEditing from '../../src/image/imageediting';
 import UndoEditing from '@ckeditor/ckeditor5-undo/src/undoediting';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 import { getData as getModelData, setData as setModelData } from '@ckeditor/ckeditor5-engine/src/dev-utils/model';
 import { getData as getViewData } from '@ckeditor/ckeditor5-engine/src/dev-utils/view';
@@ -17,6 +18,34 @@ import testUtils from '@ckeditor/ckeditor5-core/tests/_utils/utils';
 
 describe( 'ImageCaptionEditing', () => {
 	let editor, model, doc, view;
+
+	// FakePlugin helps check if the plugin under test extends existing schema correctly.
+	class FakePlugin extends Plugin {
+		init() {
+			const schema = this.editor.model.schema;
+			const conversion = this.editor.conversion;
+
+			schema.register( 'foo', {
+				isObject: true,
+				isBlock: true,
+				allowWhere: '$block'
+			} );
+			schema.register( 'caption', {
+				allowIn: 'foo',
+				allowContentOf: '$block',
+				isLimit: true
+			} );
+
+			conversion.elementToElement( {
+				view: 'foo',
+				model: 'foo'
+			} );
+			conversion.elementToElement( {
+				view: 'caption',
+				model: 'caption'
+			} );
+		}
+	}
 
 	testUtils.createSinonSandbox();
 
@@ -59,6 +88,17 @@ describe( 'ImageCaptionEditing', () => {
 
 		model.schema.extend( '$block', { allowAttributes: 'aligmnent' } );
 		expect( model.schema.checkAttribute( [ '$root', 'image', 'caption' ], 'alignment' ) ).to.be.false;
+	} );
+
+	it( 'should extend caption if schema for it is already registered', async () => {
+		const { model } = await VirtualTestEditor
+			.create( {
+				plugins: [ FakePlugin, ImageCaptionEditing, ImageEditing, UndoEditing, Paragraph ]
+			} );
+
+		expect( model.schema.isRegistered( 'caption' ) ).to.be.true;
+		expect( model.schema.isLimit( 'caption' ) ).to.be.true;
+		expect( model.schema.checkChild( [ 'image' ], 'caption' ) ).to.be.true;
 	} );
 
 	describe( 'data pipeline', () => {
@@ -430,6 +470,39 @@ describe( 'ImageCaptionEditing', () => {
 			);
 		} );
 
+		it( 'should hide placeholder when figcaption is focused', () => {
+			setModelData( model, '<paragraph>[]foo</paragraph><image src=""><caption></caption></image>' );
+
+			expect( getViewData( view ) ).to.equal(
+				'<p>{}foo</p>' +
+				'<figure class="ck-widget image" contenteditable="false">' +
+					'<img src=""></img>' +
+					'<figcaption class="ck-editor__editable ck-editor__nested-editable ck-hidden ck-placeholder" ' +
+						'contenteditable="true" data-placeholder="Enter image caption">' +
+					'</figcaption>' +
+				'</figure>'
+			);
+
+			const caption = doc.getRoot().getNodeByPath( [ 1, 0 ] );
+
+			editor.editing.view.document.isFocused = true;
+			editor.focus();
+
+			model.change( writer => {
+				writer.setSelection( writer.createRangeIn( caption ) );
+			} );
+
+			expect( getViewData( view ) ).to.equal(
+				'<p>foo</p>' +
+				'<figure class="ck-widget image" contenteditable="false">' +
+					'<img src=""></img>' +
+					'<figcaption class="ck-editor__editable ck-editor__nested-editable ck-editor__nested-editable_focused" ' +
+						'contenteditable="true" data-placeholder="Enter image caption">[]' +
+					'</figcaption>' +
+				'</figure>'
+			);
+		} );
+
 		it( 'should not add additional figcaption if one is already present', () => {
 			setModelData( model, '<paragraph>foo</paragraph>[<image src=""><caption>foo bar</caption></image>]' );
 
@@ -515,6 +588,20 @@ describe( 'ImageCaptionEditing', () => {
 					'<img src=""></img>' +
 					'<figcaption class="ck-editor__editable ck-editor__nested-editable ck-placeholder" ' +
 						'contenteditable="true" data-placeholder="Enter image caption"></figcaption>' +
+				'</figure>]'
+			);
+		} );
+
+		it( 'should not show empty figcaption when image is selected but editor is in the readOnly mode', () => {
+			editor.isReadOnly = true;
+
+			setModelData( model, '[<image src="img.png"><caption></caption></image>]' );
+
+			expect( getViewData( view ) ).to.equal(
+				'[<figure class="ck-widget image" contenteditable="false">' +
+					'<img src="img.png"></img>' +
+					'<figcaption class="ck-editor__editable ck-editor__nested-editable ck-hidden ck-placeholder" ' +
+						'contenteditable="false" data-placeholder="Enter image caption"></figcaption>' +
 				'</figure>]'
 			);
 		} );

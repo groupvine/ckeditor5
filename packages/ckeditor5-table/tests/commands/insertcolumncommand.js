@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -214,6 +214,27 @@ describe( 'InsertColumnCommand', () => {
 				] ) );
 			} );
 		} );
+
+		it( 'should be false when non-cell elements are in the selection', () => {
+			model.schema.register( 'foo', {
+				allowIn: 'table',
+				allowContentOf: '$block'
+			} );
+			editor.conversion.elementToElement( {
+				model: 'foo',
+				view: 'foo'
+			} );
+
+			setData( model,
+				'<table>' +
+					'<tableRow>' +
+						'<tableCell></tableCell>' +
+					'</tableRow>' +
+					'<foo>bar[]</foo>' +
+				'</table>'
+			);
+			expect( command.isEnabled ).to.be.false;
+		} );
 	} );
 
 	describe( 'order=left', () => {
@@ -380,6 +401,27 @@ describe( 'InsertColumnCommand', () => {
 					[ { contents: '20', colspan: 5 }, { contents: '24', colspan: 2 } ]
 				], { headingColumns: 5 } ) );
 			} );
+		} );
+
+		it( 'should be false when non-cell elements are in the selection', () => {
+			model.schema.register( 'foo', {
+				allowIn: 'table',
+				allowContentOf: '$block'
+			} );
+			editor.conversion.elementToElement( {
+				model: 'foo',
+				view: 'foo'
+			} );
+
+			setData( model,
+				'<table>' +
+					'<tableRow>' +
+						'<tableCell></tableCell>' +
+					'</tableRow>' +
+					'<foo>bar[]</foo>' +
+				'</table>'
+			);
+			expect( command.isEnabled ).to.be.false;
 		} );
 	} );
 } );

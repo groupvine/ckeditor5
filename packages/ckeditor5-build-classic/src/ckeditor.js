@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -26,12 +26,13 @@ import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
-// import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
+import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+// import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 
 import Font from '@ckeditor/ckeditor5-font/src/font';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
@@ -61,6 +62,7 @@ ClassicEditor.builtinPlugins = [
 	Underline,
 	BlockQuote,
 	// CKFinder,
+	// CloudServices,
 	// EasyImage,
 	Heading,
 	Image,
@@ -73,7 +75,7 @@ ClassicEditor.builtinPlugins = [
         IndentBlock,
 	Link,
 	List,
-	// MediaEmbed,
+        MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
 	Table,
@@ -131,13 +133,12 @@ ClassicEditor.defaultConfig = {
                         'fontColor', 'fontBackgroundColor',
 			'insertTable',
 			'|',
-			'indent',
 			'outdent',
 			'blockQuote',
 			'|',
 			'link',
 			'imageUpload',
-		        // 'mediaEmbed',
+		        'mediaEmbed',
                         'removeformat',
 			'|',
 			'undo',

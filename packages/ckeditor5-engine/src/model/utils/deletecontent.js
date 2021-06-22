@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -148,7 +148,20 @@ function getLivePositionsForSelectedBlocks( range ) {
 			// This is how modifySelection works and here we are making use of it.
 			model.modifySelection( selection, { direction: 'backward' } );
 
-			endPosition = selection.getLastPosition();
+			const newEndPosition = selection.getLastPosition();
+
+			// For such model and selection:
+			//     <paragraph>A[</paragraph><image></image><paragraph>]B</paragraph>
+			//
+			// After modifySelection() we would end up with this:
+			//     <paragraph>A[</paragraph>]<image></image><paragraph>B</paragraph>
+			//
+			// So we need to check if there is no content in the skipped range (because we want to include the <image>).
+			const skippedRange = model.createRange( newEndPosition, endPosition );
+
+			if ( !model.hasContent( skippedRange, { ignoreMarkers: true } ) ) {
+				endPosition = newEndPosition;
+			}
 		}
 	}
 
@@ -212,6 +225,18 @@ function mergeBranches( writer, startPosition, endPosition ) {
 
 	// Merging should not go deeper than common ancestor.
 	const [ startAncestor, endAncestor ] = getAncestorsJustBelowCommonAncestor( startPosition, endPosition );
+
+	// Branches can't be merged if one of the positions is directly inside a common ancestor.
+	//
+	// Example:
+	//     <blockQuote>
+	//         <paragraph>[foo</paragraph>]
+	//         <table> ... </table>
+	//     <blockQuote>
+	//
+	if ( !startAncestor || !endAncestor ) {
+		return;
+	}
 
 	if ( !model.hasContent( startAncestor, { ignoreMarkers: true } ) && model.hasContent( endAncestor, { ignoreMarkers: true } ) ) {
 		mergeBranchesRight( writer, startPosition, endPosition, startAncestor.parent );
