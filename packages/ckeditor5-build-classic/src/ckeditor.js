@@ -40,7 +40,11 @@ import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
-import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
+// import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
+import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical';
+// import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext';
+// import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows';
+import {SpecialCharactersGVArrows, SpecialCharactersGVEmojis, SpecialCharactersGVText } from './specialchars';
 
 
 //
@@ -52,7 +56,6 @@ import GVClipboardPlugin from './clipboard/clipboard';
 import UserAttribute from './user-attribute/user-attribute';
 import InputAttribute from './inp-attribute/inp-attribute';
 import EmailWidget from './email-widget/email-widget';
-import SpecialCharactersEmoji from './emojis';
 
 
 export default class ClassicEditor extends ClassicEditorBase {}
@@ -99,8 +102,11 @@ ClassicEditor.builtinPlugins = [
         EmailWidget,
 
         SpecialCharacters, 
-        SpecialCharactersEssentials, 
-        SpecialCharactersEmoji,
+        // SpecialCharactersEssentials, 
+        SpecialCharactersGVEmojis,
+        SpecialCharactersGVArrows,
+        SpecialCharactersGVText,
+        SpecialCharactersMathematical,
 
 	TextTransformation
 ];
