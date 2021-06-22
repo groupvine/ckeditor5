@@ -52,15 +52,7 @@ import GVClipboardPlugin from './clipboard/clipboard';
 import UserAttribute from './user-attribute/user-attribute';
 import InputAttribute from './inp-attribute/inp-attribute';
 import EmailWidget from './email-widget/email-widget';
-
-
-function SpecialCharactersEmoji( editor ) {
-    editor.plugins.get( 'SpecialCharacters' ).addItems( 'Emoji', [
-        { title: 'smiley face', character: '😃' },
-        { title: 'cool face', character: '😎' },
-        { title: 'heart', character: '♥' }
-    ] );
-}
+import SpecialCharactersEmoji from './emojis';
 
 
 export default class ClassicEditor extends ClassicEditorBase {}

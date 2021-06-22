@@ -54,7 +54,14 @@ module.exports = {
 		new webpack.BannerPlugin( {
 			banner: bundler.getLicenseBanner(),
 			raw: true
-		} )
+		} ),
+
+                // Replace the special characters menu icon (was omega char)
+                // see: https://ckeditor.com/docs/ckeditor5/latest/builds/guides/faq.html#how-to-customize-the-ckeditor-5-icons
+                new webpack.NormalModuleReplacementPlugin(
+                    /specialcharacters\.svg/,
+                    path.join(__dirname, 'src', 'emoji_emotions_black_24dp.svg')
+                )
 	],
 
 	module: {
