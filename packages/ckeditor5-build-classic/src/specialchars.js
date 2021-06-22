@@ -2,6 +2,35 @@
 // see: https://unicode-table.com/en/sets/emoji/
 // use Meta-x insert-char
 
+export function SpecialCharactersGVMath( editor ) {
+    let specCharsPlugin = editor.plugins.get( 'SpecialCharacters' );
+
+    specCharsPlugin.addItems( 'Math', [
+	{ character: '<', title: 'Less-than sign' },
+	{ character: '>', title: 'Greater-than sign' },
+	{ character: '≤', title: 'Less-than or equal to' },
+	{ character: '≥', title: 'Greater-than or equal to' },
+	{ character: '±', title: 'Plus-minus sign' },
+	{ character: '÷', title: 'Division sign' },
+	{ character: '×', title: 'Multiplication sign' },
+	{ character: '∑', title: 'N-ary summation' },
+	{ character: '∞', title: 'Infinity' },
+	{ character: '√', title: 'Square root' },
+	{ character: '≠', title: 'Not equal to' },
+	{ character: '∈', title: 'Element of' },
+	{ character: '∉', title: 'Not an element of' },
+	{ character: '∋', title: 'Contains as member' },
+	{ character: '∏', title: 'N-ary product' },
+	// { character: '∧', title: 'Logical and' },
+	// { character: '∨', title: 'Logical or' },
+	{ character: '∩', title: 'Intersection' },
+	{ character: '∪', title: 'Union' },
+	{ character: '¼', title: 'Vulgar fraction one quarter' },
+	{ character: '½', title: 'Vulgar fraction one half' },
+	{ character: '¾', title: 'Vulgar fraction three quarters' }
+    ] );
+}
+
 export function SpecialCharactersGVArrows( editor ) {
     let specCharsPlugin = editor.plugins.get( 'SpecialCharacters' );
 
@@ -24,6 +53,9 @@ export function SpecialCharactersGVText( editor ) {
 	{ character: '©', title: 'Copyright sign' },
 	{ character: '®', title: 'Registered sign' },
 	{ character: '™', title: 'Trade mark sign' },
+	{ character: '–', title: 'En dash' },
+	{ character: '—', title: 'Em dash' },
+	{ character: '°', title: 'Degree sign' },
 	{ character: '‹', title: 'Single left angle quotation mark' },
 	{ character: '›', title: 'Single right angle quotation mark' },
 	{ character: '«', title: 'Double left angle quotation mark' },

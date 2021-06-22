@@ -41,10 +41,13 @@ import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleu
 
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
 // import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
-import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical';
+// import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical';
 // import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext';
 // import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows';
-import {SpecialCharactersGVArrows, SpecialCharactersGVEmojis, SpecialCharactersGVText } from './specialchars';
+import {SpecialCharactersGVArrows, 
+        SpecialCharactersGVEmojis, 
+        SpecialCharactersGVMath, 
+        SpecialCharactersGVText } from './specialchars';
 
 
 //
@@ -106,7 +109,7 @@ ClassicEditor.builtinPlugins = [
         SpecialCharactersGVEmojis,
         SpecialCharactersGVArrows,
         SpecialCharactersGVText,
-        SpecialCharactersMathematical,
+        SpecialCharactersGVMath,
 
 	TextTransformation
 ];
