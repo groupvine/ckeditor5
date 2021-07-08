@@ -24,7 +24,6 @@ import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
-import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
@@ -49,7 +48,6 @@ import {SpecialCharactersGVArrows,
         SpecialCharactersGVMath, 
         SpecialCharactersGVText } from './specialchars';
 
-
 //
 // Custom GroupVine plugins
 //
@@ -59,6 +57,9 @@ import GVClipboardPlugin from './clipboard/clipboard';
 import UserAttribute from './user-attribute/user-attribute';
 import InputAttribute from './inp-attribute/inp-attribute';
 import EmailWidget from './email-widget/email-widget';
+
+import Link from '@ckeditor/ckeditor5-link/src/link';
+// import Link from './buttonlink/link';
 
 
 export default class ClassicEditor extends ClassicEditorBase {}
