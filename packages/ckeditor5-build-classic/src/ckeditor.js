@@ -80,10 +80,12 @@ ClassicEditor.builtinPlugins = [
 	Heading,
 	Image,
 	ImageCaption,
-	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
         ImageResize,
+        ImageStyle, 
+        LinkImage,
+
 	Indent,
         IndentBlock,
 	Link,
@@ -201,10 +203,10 @@ ClassicEditor.defaultConfig = {
                 '|',
                 'imageResize',
                 '|',
-                'toggleImageCaption',
-                'imageTextAlternative',
+                'linkImage',
                 '|',
-                'linkimage'
+                'toggleImageCaption',
+                'imageTextAlternative'
             ]
 
 	},

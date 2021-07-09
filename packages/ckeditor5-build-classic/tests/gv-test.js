@@ -70,6 +70,10 @@ const initContent = `
       <span class="placeholder">{Last name}</span>
     -->
 
+    <div class="image image_resized" style="width:52.55%;">
+       <img src="https://www.groupvine.com/assets/img/groupvine2_rgb.png">
+    </div>
+
     <div class="gv-input-attribute" data-type="optedout"></div>
 
     <div class="gv-input-attribute" data-type="optedout"></div>
