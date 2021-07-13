@@ -15,6 +15,7 @@ import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 // import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 // import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
+// import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Image from '@ckeditor/ckeditor5-image/src/image';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
@@ -67,37 +68,38 @@ export default class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
-	Essentials,
+        Essentials,
         // UploadAdapter,
-	Autoformat,
-	Bold,
-	Italic,
-	Underline,
-	BlockQuote,
-	// CKFinder,
-	// CloudServices,
-	// EasyImage,
-	Heading,
-	Image,
-	ImageCaption,
-	ImageToolbar,
-	ImageUpload,
+        Autoformat,
+        Bold,
+        Italic,
+        Underline,
+        BlockQuote,
+        // CKFinder,
+        // CloudServices,
+        // EasyImage,
+        Heading,
+        // FindAndReplace,
+        Image,
+        ImageCaption,
+        ImageToolbar,
+        ImageUpload,
         ImageResize,
         ImageStyle, 
         LinkImage,
 
-	Indent,
+        Indent,
         IndentBlock,
-	Link,
-	List,
+        Link,
+        List,
         // MediaEmbed,
-	Paragraph,
-	PasteFromOffice,
-	Table,
-	TableToolbar,
-	Font,
+        Paragraph,
+        PasteFromOffice,
+        Table,
+        TableToolbar,
+        Font,
 
-	SimpleUploadAdapter,
+        SimpleUploadAdapter,
         Alignment,
         RemoveFormat,
 
@@ -115,7 +117,7 @@ ClassicEditor.builtinPlugins = [
         SpecialCharactersGVText,
         SpecialCharactersGVMath,
 
-	TextTransformation
+        TextTransformation
 ];
 
 // Editor configuration.
@@ -137,42 +139,43 @@ ClassicEditor.defaultConfig = {
             ]
         },
 
-	toolbar: {
+        toolbar: {
                 // shouldNotGroupWhenFull : true,
 
-		items: [
-			'heading',
+                items: [
+                        'heading',
                         'fontSize', 
                         'fontFamily',
-			'bold',
-			'italic',
+                        'bold',
+                        'italic',
                         'underline',
-			'|',
-			'bulletedList',
-			'numberedList',
+                        '|',
+                        'bulletedList',
+                        'numberedList',
                         'alignment',
-			'|',
+                        '|',
                         'gv-user-attribute',
                         'gv-email-widget',
                         'gv-input-attribute',
                         'fontColor', 'fontBackgroundColor',
-			'insertTable',
-			'|',
-			'outdent',
-			'blockQuote',
-			'|',
-			'link',
-			'imageUpload',
-     		        // 'mediaEmbed',
+                        'insertTable',
+                        '|',
+                        'outdent',
+                        'blockQuote',
+                        '|',
+                        'link',
+                        'imageUpload',
+                        // 'mediaEmbed',
                         'specialCharacters',
                         'removeformat',
-			'|',
-			'undo',
-			'redo'
-		]
-	},
+                        '|',
+                        // 'findAndReplace',
+                        'undo',
+                        'redo'
+                ]
+        },
 
-	image: {
+        image: {
             styles: [
                 'alignLeft', 'alignCenter', 'alignRight'
             ],
@@ -208,16 +211,15 @@ ClassicEditor.defaultConfig = {
                 'toggleImageCaption',
                 'imageTextAlternative'
             ]
+        },
 
-	},
-
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
-	},
+        table: {
+                contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells'
+                ]
+        },
 
         heading: {
             options: [
@@ -238,24 +240,24 @@ ClassicEditor.defaultConfig = {
         fontFamily : {
             supportAllValues: true,
             options: [
-		'default',
-		'Arial, Helvetica, sans-serif',
+                'default',
+                'Arial, Helvetica, sans-serif',
                 'Arial Black, Helvetica, sans-serif',
-		'Courier New, Courier, monospace',
+                'Courier New, Courier, monospace',
                 'Comic Sans MS, Helvetica, sans-serif',
-		'Georgia, serif',
+                'Georgia, serif',
                 'Impact, Arial Black, Arial, sans-serif',
-		'Lucida Sans Unicode, Lucida Grande, sans-serif',
-		'Tahoma, Geneva, sans-serif',
-		'Times New Roman, Times, serif',
-		'Trebuchet MS, Helvetica, sans-serif',
+                'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                'Tahoma, Geneva, sans-serif',
+                'Times New Roman, Times, serif',
+                'Trebuchet MS, Helvetica, sans-serif',
                 'Ubuntu, Arial, sans-serif',
                 'Ubuntu Mono, Courier New, Courier, monospace',
-		'Verdana, Geneva, sans-serif'
-	    ]
+                'Verdana, Geneva, sans-serif'
+            ]
         },
 
 
-	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+        // This value must be kept in sync with the language defined in webpack.config.js.
+        language: 'en'
 };
